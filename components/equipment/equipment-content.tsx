@@ -1,8 +1,7 @@
-
 "use client"
 
 import React, { useState } from "react"
-import { Plus, LayoutGrid, List, Search, Box, MoreVertical, Wrench, MapPin, Activity, QrCode } from "lucide-react"
+import { Plus, LayoutGrid, List, Search, Box, MoreVertical, Wrench, Activity } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -50,181 +49,155 @@ export function EquipmentContent() {
   }
 
   return (
-    <div className="flex-1 overflow-auto p-4 lg:p-8 bg-[#F8FAFC]">
-      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+    <div className="flex-1 overflow-auto p-6 lg:p-8">
+      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <div className="flex items-center gap-3 mb-1">
-             <div className="h-10 w-10 rounded-xl bg-transparent flex items-center justify-center text-slate-900">
-                <Wrench className="h-8 w-8 stroke-[2.5]" />
-             </div>
-             <h1 className="text-4xl font-black tracking-tighter text-slate-900">Equipment & Assets</h1>
-          </div>
-          <p className="text-slate-500 font-medium ml-1 text-base">
-            Inventory tracking, calibration schedules, and real-time status monitoring.
+          <h1 className="text-2xl font-semibold tracking-tight text-foreground">Equipment & Assets</h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            Inventory tracking, calibration schedules, and status monitoring.
           </p>
         </div>
         <Button 
             onClick={() => { setEditingItem(null); setFormOpen(true) }}
-            className="h-12 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold shadow-xl shadow-slate-900/10 px-6 transition-all hover:scale-105 active:scale-95 border-2 border-transparent"
+            className="h-9 px-3.5 text-sm font-medium bg-foreground text-background hover:bg-foreground/90"
         >
-            <Plus className="mr-2 h-4 w-4" />
+            <Plus className="mr-1.5 h-3.5 w-3.5" />
             Add Asset
         </Button>
       </div>
 
-      {/* Filters Toolbar */}
-      <div className="sticky top-0 z-20 mb-6 py-3 bg-[#F8FAFC]/95 backdrop-blur-md">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center justify-between">
-          <div className="relative flex-1 group max-w-sm">
-            <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400 group-focus-within:text-slate-600 transition-colors" />
-            <Input 
-                placeholder="Search by name, model or serial number..." 
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="pl-11 h-12 border-none bg-white shadow-sm rounded-xl font-medium text-slate-700 placeholder:text-slate-400 transition-all ring-1 ring-slate-100 focus-visible:ring-2 focus-visible:ring-blue-500/20" 
-            />
-          </div>
+      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center justify-between">
+        <div className="relative flex-1 max-w-sm">
+          <Search className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+          <Input 
+              placeholder="Search by name, model or serial..." 
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="pl-9 h-9 text-sm" 
+          />
+        </div>
+        
+        <div className="flex items-center gap-2">
+          <Select defaultValue="all">
+              <SelectTrigger className="h-9 px-3 min-w-[140px] text-sm"><SelectValue placeholder="All Labs" /></SelectTrigger>
+              <SelectContent><SelectItem value="all">All Laboratories</SelectItem></SelectContent>
+          </Select>
+          <Select defaultValue="all">
+              <SelectTrigger className="h-9 px-3 min-w-[130px] text-sm"><SelectValue placeholder="All Statuses" /></SelectTrigger>
+              <SelectContent><SelectItem value="all">All Statuses</SelectItem></SelectContent>
+          </Select>
           
-          <div className="flex items-center gap-3 overflow-x-auto pb-2 sm:pb-0 no-scrollbar">
-            <Select defaultValue="all">
-                <SelectTrigger className="h-12 px-4 min-w-[160px] border-none bg-slate-100 hover:bg-slate-200/70 rounded-xl font-bold text-slate-700 text-xs transition-all"><SelectValue placeholder="All Laboratories" /></SelectTrigger>
-                <SelectContent><SelectItem value="all">All Laboratories</SelectItem></SelectContent>
-            </Select>
-            <Select defaultValue="all">
-                <SelectTrigger className="h-12 px-4 min-w-[140px] border-none bg-slate-100 hover:bg-slate-200/70 rounded-xl font-bold text-slate-700 text-xs transition-all"><SelectValue placeholder="All Statuses" /></SelectTrigger>
-                <SelectContent><SelectItem value="all">All Statuses</SelectItem></SelectContent>
-            </Select>
-            <Select defaultValue="all">
-                <SelectTrigger className="h-12 px-4 min-w-[140px] border-none bg-slate-100 hover:bg-slate-200/70 rounded-xl font-bold text-slate-700 text-xs transition-all"><SelectValue placeholder="Calibration: All" /></SelectTrigger>
-                <SelectContent><SelectItem value="all">Calibration: All</SelectItem></SelectContent>
-            </Select>
-            
-            <ToggleGroup type="single" value={viewMode} onValueChange={(v) => v && setViewMode(v as "grid" | "list")} className="ml-2 bg-transparent border-none p-0 gap-1">
-                <ToggleGroupItem value="grid" className="h-12 w-12 rounded-xl data-[state=on]:bg-white data-[state=on]:shadow-sm text-slate-400 data-[state=on]:text-slate-900"><LayoutGrid className="h-5 w-5" /></ToggleGroupItem>
-                <ToggleGroupItem value="list" className="h-12 w-12 rounded-xl data-[state=on]:bg-white data-[state=on]:shadow-sm text-slate-400 data-[state=on]:text-slate-900"><List className="h-5 w-5" /></ToggleGroupItem>
-            </ToggleGroup>
-          </div>
+          <ToggleGroup type="single" value={viewMode} onValueChange={(v) => v && setViewMode(v as "grid" | "list")} className="ml-1">
+              <ToggleGroupItem value="grid" className="h-9 w-9 rounded-md"><LayoutGrid className="h-4 w-4" /></ToggleGroupItem>
+              <ToggleGroupItem value="list" className="h-9 w-9 rounded-md"><List className="h-4 w-4" /></ToggleGroupItem>
+          </ToggleGroup>
         </div>
       </div>
 
       {filteredItems.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-20 text-center bg-white rounded-[2.5rem] border-2 border-dashed border-slate-200">
-            <div className="h-16 w-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-4 text-slate-300 border-2 border-slate-100">
-                <Search className="h-8 w-8" />
-            </div>
-            <h3 className="text-xl font-black text-slate-900">No assets found</h3>
-            <p className="text-slate-500 font-medium max-w-xs mx-auto mt-1 mb-6">
-                Try adjusting your search terms or filters to find what you're looking for.
+        <div className="flex flex-col items-center justify-center py-16 text-center border border-dashed border-border rounded-lg">
+            <Search className="h-8 w-8 text-muted-foreground/30 mb-3" />
+            <h3 className="text-sm font-medium text-foreground">No assets found</h3>
+            <p className="text-sm text-muted-foreground max-w-xs mx-auto mt-1 mb-4">
+                Try adjusting your search terms or filters.
             </p>
-            <Button variant="outline" onClick={() => setSearch("")} className="border-2 border-slate-200 rounded-xl font-bold text-slate-600 hover:text-slate-900">
-                Clear Search
-            </Button>
+            <Button variant="outline" size="sm" onClick={() => setSearch("")}>Clear Search</Button>
         </div>
       ) : viewMode === "list" ? (
+        <div className="border border-border rounded-lg overflow-hidden">
         <Table>
             <TableHeader>
-                <TableRow className="border-b-2 border-slate-100 hover:bg-transparent">
-                    <TableHead className="pl-8 h-14 text-[10px] uppercase tracking-wider font-bold text-slate-400">Asset Profile</TableHead>
-                    <TableHead className="h-14 text-[10px] uppercase tracking-wider font-bold text-slate-400">Location</TableHead>
-                    <TableHead className="h-14 text-[10px] uppercase tracking-wider font-bold text-slate-400">Serial No.</TableHead>
-                    <TableHead className="h-14 text-[10px] uppercase tracking-wider font-bold text-slate-400">Health</TableHead>
-                    <TableHead className="h-14 text-[10px] uppercase tracking-wider font-bold text-slate-400">Next Calibration</TableHead>
-                    <TableHead className="h-14 text-[10px] uppercase tracking-wider font-bold text-slate-400">Status</TableHead>
-                    <TableHead className="text-right pr-8 h-14 text-[10px] uppercase tracking-wider font-bold text-slate-400">Actions</TableHead>
+                <TableRow className="hover:bg-transparent">
+                    <TableHead className="pl-5 h-10 text-xs font-medium text-muted-foreground">Asset</TableHead>
+                    <TableHead className="h-10 text-xs font-medium text-muted-foreground">Location</TableHead>
+                    <TableHead className="h-10 text-xs font-medium text-muted-foreground">Serial No.</TableHead>
+                    <TableHead className="h-10 text-xs font-medium text-muted-foreground">Health</TableHead>
+                    <TableHead className="h-10 text-xs font-medium text-muted-foreground">Next Calibration</TableHead>
+                    <TableHead className="h-10 text-xs font-medium text-muted-foreground">Status</TableHead>
+                    <TableHead className="text-right pr-5 h-10 text-xs font-medium text-muted-foreground">Actions</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
                 {filteredItems.map((item) => (
-                    <TableRow key={item.id} onClick={() => { setSelected(item); setSheetOpen(true) }} className="group cursor-pointer hover:bg-slate-50 border-b-2 border-slate-50 last:border-0">
-                        <TableCell className="pl-8 py-4">
-                            <div className="flex items-center gap-4">
-                                <div className="h-10 w-10 rounded-lg bg-slate-50 flex items-center justify-center text-slate-400 border border-slate-100 group-hover:border-blue-200 group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
-                                    <Box className="h-5 w-5" />
+                    <TableRow key={item.id} onClick={() => { setSelected(item); setSheetOpen(true) }} className="cursor-pointer">
+                        <TableCell className="pl-5 py-3">
+                            <div className="flex items-center gap-3">
+                                <div className="h-8 w-8 rounded-md bg-muted flex items-center justify-center text-muted-foreground">
+                                    <Box className="h-4 w-4" />
                                 </div>
                                 <div>
-                                    <div className="font-bold text-slate-900 text-sm">{item.name}</div>
-                                    <div className="text-[11px] font-bold text-slate-400 mt-0.5 uppercase tracking-wide">{item.model}</div>
+                                    <div className="text-sm font-medium text-foreground">{item.name}</div>
+                                    <div className="text-xs text-muted-foreground mt-0.5">{item.model}</div>
                                 </div>
                             </div>
                         </TableCell>
                         <TableCell>
-                            <div className="flex flex-col">
-                                <span className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
-                                    {item.labName}
-                                </span>
-                                <span className="text-[10px] text-slate-400 font-medium">Block A, 101</span>
-                            </div>
+                            <span className="text-sm text-foreground">{item.labName}</span>
                         </TableCell>
                         <TableCell>
-                            <span className="text-xs font-bold text-slate-500 font-mono">
-                                {item.serialNumber}
-                            </span>
+                            <span className="text-sm text-muted-foreground font-mono">{item.serialNumber}</span>
                         </TableCell>
                         <TableCell>
-                            <div className="flex items-center gap-2">
-                                <div className={`h-2 w-2 rounded-full ${item.status === 'active' ? 'bg-emerald-500' : item.status === 'maintenance' ? 'bg-amber-500' : 'bg-red-500'}`} />
-                                <span className="text-xs font-bold text-slate-700">
+                            <div className="flex items-center gap-1.5">
+                                <div className={`h-1.5 w-1.5 rounded-full ${item.status === 'active' ? 'bg-emerald-500' : item.status === 'maintenance' ? 'bg-amber-500' : 'bg-destructive'}`} />
+                                <span className="text-sm text-foreground">
                                     {item.status === 'active' ? '100%' : item.status === 'maintenance' ? '70%' : '0%'}
                                 </span>
                             </div>
                         </TableCell>
                         <TableCell>
-                            <div className="flex items-center gap-2 text-xs font-bold text-slate-600">
-                                <Activity className="h-3.5 w-3.5 text-slate-300" /> 
+                            <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                                <Activity className="h-3.5 w-3.5" /> 
                                 {new Date(item.nextCalibration).toLocaleDateString()}
                             </div>
                         </TableCell>
                         <TableCell>
-                            <Badge className={`rounded-lg px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide shadow-none border-2 ${
-                                item.status === 'active' ? 'bg-emerald-50 border-emerald-100 text-emerald-700' : 
-                                item.status === 'maintenance' ? 'bg-amber-50 border-amber-100 text-amber-700' :
-                                'bg-slate-100 border-slate-100 text-slate-500'
+                            <Badge variant="outline" className={`text-[11px] font-medium px-1.5 py-0 rounded ${
+                                item.status === 'active' ? 'text-emerald-600 border-emerald-200 bg-emerald-50' : 
+                                item.status === 'maintenance' ? 'text-amber-600 border-amber-200 bg-amber-50' :
+                                'text-muted-foreground'
                             }`}>
                                 {item.status}
                             </Badge>
                         </TableCell>
-                        <TableCell className="text-right pr-8">
-                            <Button variant="ghost" size="icon" className="h-8 w-8 text-slate-300 hover:text-slate-600 rounded-lg hover:bg-slate-100">
-                                <MoreVertical className="h-4 w-4" />
+                        <TableCell className="text-right pr-5">
+                            <Button variant="ghost" size="icon" className="h-7 w-7 text-muted-foreground hover:text-foreground rounded-md">
+                                <MoreVertical className="h-3.5 w-3.5" />
                             </Button>
                         </TableCell>
                     </TableRow>
                 ))}
             </TableBody>
         </Table>
+        </div>
       ) : (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {filteredItems.map((item) => (
-                <div key={item.id} onClick={() => { setSelected(item); setSheetOpen(true) }} className="group relative bg-white p-0 rounded-[2.5rem] shadow-sm hover:shadow-xl hover:shadow-blue-900/5 transition-all cursor-pointer flex flex-col overflow-hidden h-[280px] hover:-translate-y-1 border-2 border-slate-200">
-                    {/* Status Strip */}
-                    <div className={`h-1.5 w-full ${item.status === 'active' ? 'bg-emerald-500' : item.status === 'maintenance' ? 'bg-amber-500' : 'bg-slate-300'}`} />
-                    
-                    <div className="p-6 flex-1 flex flex-col">
-                        <div className="flex justify-between items-start mb-4">
-                            <div className="h-12 w-12 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
-                                <Box className="h-6 w-6" />
-                            </div>
-                            <Badge className={`rounded-lg px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide shadow-none border-2 ${
-                                item.status === 'active' ? 'bg-emerald-50 border-emerald-100 text-emerald-700' : 
-                                item.status === 'maintenance' ? 'bg-amber-50 border-amber-100 text-amber-700' :
-                                'bg-slate-50 border-slate-100 text-slate-500'
-                            }`}>
-                                {item.status}
-                            </Badge>
+                <div key={item.id} onClick={() => { setSelected(item); setSheetOpen(true) }} className="group bg-card p-5 rounded-lg border border-border hover:border-foreground/20 transition-colors cursor-pointer flex flex-col">
+                    <div className="flex justify-between items-start mb-4">
+                        <div className="h-9 w-9 rounded-lg bg-muted flex items-center justify-center text-muted-foreground">
+                            <Box className="h-4.5 w-4.5" />
                         </div>
-                        
-                        <h3 className="font-bold text-slate-900 text-lg mb-1 leading-tight group-hover:text-blue-700 transition-colors line-clamp-2">{item.name}</h3>
-                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-4">{item.model}</p>
-                        
-                        <div className="mt-auto space-y-2">
-                            <div className="flex items-center justify-between">
-                                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Serial</span>
-                                <span className="text-xs font-mono font-bold text-slate-700">{item.serialNumber}</span>
-                            </div>
-                            <div className="flex items-center justify-between">
-                                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Location</span>
-                                <span className="text-xs font-bold text-slate-700">{item.labName}</span>
-                            </div>
+                        <Badge variant="outline" className={`text-[11px] font-medium px-1.5 py-0 rounded ${
+                            item.status === 'active' ? 'text-emerald-600 border-emerald-200 bg-emerald-50' : 
+                            item.status === 'maintenance' ? 'text-amber-600 border-amber-200 bg-amber-50' :
+                            'text-muted-foreground'
+                        }`}>
+                            {item.status}
+                        </Badge>
+                    </div>
+                    
+                    <h3 className="font-medium text-foreground text-sm mb-0.5 line-clamp-2">{item.name}</h3>
+                    <p className="text-xs text-muted-foreground mb-4">{item.model}</p>
+                    
+                    <div className="mt-auto space-y-1.5 pt-4 border-t border-border">
+                        <div className="flex items-center justify-between">
+                            <span className="text-xs text-muted-foreground">Serial</span>
+                            <span className="text-xs font-mono text-foreground">{item.serialNumber}</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                            <span className="text-xs text-muted-foreground">Location</span>
+                            <span className="text-xs text-foreground">{item.labName}</span>
                         </div>
                     </div>
                 </div>

@@ -1,8 +1,7 @@
-
 "use client"
 
 import React, { useState } from "react"
-import { Plus, Search, MoreVertical, LayoutGrid, List, Users, Shield, Mail } from "lucide-react"
+import { Plus, Search, MoreVertical, LayoutGrid, List, Users, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -47,139 +46,127 @@ export function UsersContent() {
   }
 
   return (
-    <div className="flex-1 overflow-auto p-4 lg:p-8 bg-[#F8FAFC]">
-      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+    <div className="flex-1 overflow-auto p-6 lg:p-8">
+      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <div className="flex items-center gap-3 mb-1">
-             <div className="h-10 w-10 rounded-xl bg-transparent flex items-center justify-center text-slate-900">
-                <Users className="h-8 w-8 stroke-[2.5]" />
-             </div>
-             <h1 className="text-4xl font-black tracking-tighter text-slate-900">Researchers & Staff</h1>
-          </div>
-          <p className="text-slate-500 font-medium ml-1 text-base">
-            Manage user identities, role assignments, and system access levels.
+          <h1 className="text-2xl font-semibold tracking-tight text-foreground">Researchers & Staff</h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            Manage user identities, role assignments, and access levels.
           </p>
         </div>
-        <Button onClick={() => { setEditingUser(null); setFormOpen(true) }} className="h-12 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold shadow-xl shadow-slate-900/10 px-6 transition-all hover:scale-105 active:scale-95 border-2 border-transparent">
-            <Plus className="mr-2 h-4 w-4" />
+        <Button onClick={() => { setEditingUser(null); setFormOpen(true) }} className="h-9 px-3.5 text-sm font-medium bg-foreground text-background hover:bg-foreground/90">
+            <Plus className="mr-1.5 h-3.5 w-3.5" />
             Add Personnel
         </Button>
       </div>
 
-      <div className="sticky top-0 z-20 mb-6 py-3 bg-[#F8FAFC]/95 backdrop-blur-md">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center justify-between">
-          <div className="relative flex-1 group max-w-sm">
-            <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400 group-focus-within:text-slate-600 transition-colors" />
-            <Input
-              placeholder="Search personnel by name or ID..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="pl-11 h-12 border-none bg-white shadow-sm rounded-xl font-medium text-slate-700 placeholder:text-slate-400 transition-all ring-1 ring-slate-100 focus-visible:ring-2 focus-visible:ring-blue-500/20"
-            />
-          </div>
-          <div className="flex items-center gap-3 overflow-x-auto pb-2 sm:pb-0 no-scrollbar">
-            <Select value={roleFilter} onValueChange={setRoleFilter}>
-              <SelectTrigger className="h-12 px-4 min-w-[140px] border-none bg-slate-100 hover:bg-slate-200/70 rounded-xl font-bold text-slate-700 text-xs transition-all"><SelectValue placeholder="All Roles" /></SelectTrigger>
-              <SelectContent><SelectItem value="all">All Roles</SelectItem><SelectItem value="master">Master</SelectItem><SelectItem value="configurator">Configurator</SelectItem><SelectItem value="user">User</SelectItem></SelectContent>
-            </Select>
-            <Select value={statusFilter} onValueChange={setStatusFilter}>
-              <SelectTrigger className="h-12 px-4 min-w-[140px] border-none bg-slate-100 hover:bg-slate-200/70 rounded-xl font-bold text-slate-700 text-xs transition-all"><SelectValue placeholder="All Statuses" /></SelectTrigger>
-              <SelectContent><SelectItem value="all">All Statuses</SelectItem><SelectItem value="active">Active</SelectItem><SelectItem value="inactive">Inactive</SelectItem></SelectContent>
-            </Select>
-            
-            <ToggleGroup type="single" value={viewMode} onValueChange={(v) => v && setViewMode(v as "grid" | "list")} className="ml-2 bg-transparent border-none p-0 gap-1">
-                <ToggleGroupItem value="grid" className="h-12 w-12 rounded-xl data-[state=on]:bg-white data-[state=on]:shadow-sm text-slate-400 data-[state=on]:text-slate-900"><LayoutGrid className="h-5 w-5" /></ToggleGroupItem>
-                <ToggleGroupItem value="list" className="h-12 w-12 rounded-xl data-[state=on]:bg-white data-[state=on]:shadow-sm text-slate-400 data-[state=on]:text-slate-900"><List className="h-5 w-5" /></ToggleGroupItem>
-            </ToggleGroup>
-          </div>
+      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center justify-between">
+        <div className="relative flex-1 max-w-sm">
+          <Search className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+          <Input
+            placeholder="Search by name or email..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="pl-9 h-9 text-sm"
+          />
+        </div>
+        <div className="flex items-center gap-2">
+          <Select value={roleFilter} onValueChange={setRoleFilter}>
+            <SelectTrigger className="h-9 px-3 min-w-[120px] text-sm"><SelectValue placeholder="All Roles" /></SelectTrigger>
+            <SelectContent><SelectItem value="all">All Roles</SelectItem><SelectItem value="master">Master</SelectItem><SelectItem value="configurator">Configurator</SelectItem><SelectItem value="user">User</SelectItem></SelectContent>
+          </Select>
+          <Select value={statusFilter} onValueChange={setStatusFilter}>
+            <SelectTrigger className="h-9 px-3 min-w-[120px] text-sm"><SelectValue placeholder="All Statuses" /></SelectTrigger>
+            <SelectContent><SelectItem value="all">All Statuses</SelectItem><SelectItem value="active">Active</SelectItem><SelectItem value="inactive">Inactive</SelectItem></SelectContent>
+          </Select>
+          
+          <ToggleGroup type="single" value={viewMode} onValueChange={(v) => v && setViewMode(v as "grid" | "list")} className="ml-1">
+              <ToggleGroupItem value="grid" className="h-9 w-9 rounded-md"><LayoutGrid className="h-4 w-4" /></ToggleGroupItem>
+              <ToggleGroupItem value="list" className="h-9 w-9 rounded-md"><List className="h-4 w-4" /></ToggleGroupItem>
+          </ToggleGroup>
         </div>
       </div>
 
       {filtered.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-20 text-center bg-white rounded-[2.5rem] border-2 border-dashed border-slate-200">
-            <div className="h-16 w-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-4 text-slate-300 border-2 border-slate-100">
-                <Users className="h-8 w-8" />
-            </div>
-            <h3 className="text-xl font-black text-slate-900">No personnel found</h3>
-            <p className="text-slate-500 font-medium max-w-xs mx-auto mt-1 mb-6">
-                Try adjusting your search terms or filters to find team members.
+        <div className="flex flex-col items-center justify-center py-16 text-center border border-dashed border-border rounded-lg">
+            <Users className="h-8 w-8 text-muted-foreground/30 mb-3" />
+            <h3 className="text-sm font-medium text-foreground">No personnel found</h3>
+            <p className="text-sm text-muted-foreground max-w-xs mx-auto mt-1 mb-4">
+                Try adjusting your search terms or filters.
             </p>
-            <Button variant="outline" onClick={() => { setSearch(""); setRoleFilter("all"); setStatusFilter("all"); }} className="border-2 border-slate-200 rounded-xl font-bold text-slate-600 hover:text-slate-900">
-                Clear Filters
-            </Button>
+            <Button variant="outline" size="sm" onClick={() => { setSearch(""); setRoleFilter("all"); setStatusFilter("all"); }}>Clear Filters</Button>
         </div>
       ) : viewMode === "list" ? (
+        <div className="border border-border rounded-lg overflow-hidden">
         <Table>
             <TableHeader>
-                <TableRow className="border-b-2 border-slate-100 hover:bg-transparent">
-                    <TableHead className="pl-8 h-14 text-[10px] uppercase tracking-wider font-bold text-slate-400">Identity</TableHead>
-                    <TableHead className="h-14 text-[10px] uppercase tracking-wider font-bold text-slate-400">Role</TableHead>
-                    <TableHead className="h-14 text-[10px] uppercase tracking-wider font-bold text-slate-400">Status</TableHead>
-                    <TableHead className="h-14 text-[10px] uppercase tracking-wider font-bold text-slate-400">Cohorts</TableHead>
-                    <TableHead className="h-14 text-[10px] uppercase tracking-wider font-bold text-slate-400">Joined</TableHead>
-                    <TableHead className="text-right pr-8 h-14 text-[10px] uppercase tracking-wider font-bold text-slate-400">Actions</TableHead>
+                <TableRow className="hover:bg-transparent">
+                    <TableHead className="pl-5 h-10 text-xs font-medium text-muted-foreground">Identity</TableHead>
+                    <TableHead className="h-10 text-xs font-medium text-muted-foreground">Role</TableHead>
+                    <TableHead className="h-10 text-xs font-medium text-muted-foreground">Status</TableHead>
+                    <TableHead className="h-10 text-xs font-medium text-muted-foreground">Cohorts</TableHead>
+                    <TableHead className="h-10 text-xs font-medium text-muted-foreground">Joined</TableHead>
+                    <TableHead className="text-right pr-5 h-10 text-xs font-medium text-muted-foreground">Actions</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
                 {filtered.map((user) => (
-                    <TableRow key={user.id} className="cursor-pointer group hover:bg-slate-50 border-b-2 border-slate-50 last:border-0">
-                        <TableCell className="pl-8 py-4">
-                            <div className="flex items-center gap-4">
-                                <Avatar className="h-10 w-10 shadow-sm rounded-xl border-2 border-white ring-1 ring-slate-100">
+                    <TableRow key={user.id} className="cursor-pointer">
+                        <TableCell className="pl-5 py-3">
+                            <div className="flex items-center gap-3">
+                                <Avatar className="h-8 w-8 rounded-md border border-border">
                                     <AvatarImage src={user.avatar} />
-                                    <AvatarFallback className="bg-slate-200 text-slate-600 font-bold">{user.firstName[0]}</AvatarFallback>
+                                    <AvatarFallback className="bg-muted text-muted-foreground font-medium text-xs rounded-md">{user.firstName[0]}</AvatarFallback>
                                 </Avatar>
                                 <div>
-                                    <div className="text-sm font-bold text-slate-900">{user.firstName} {user.lastName}</div>
-                                    <div className="text-xs font-medium text-slate-400">{user.email}</div>
+                                    <div className="text-sm font-medium text-foreground">{user.firstName} {user.lastName}</div>
+                                    <div className="text-xs text-muted-foreground">{user.email}</div>
                                 </div>
                             </div>
                         </TableCell>
                         <TableCell>
-                            <Badge className={`rounded-lg px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide shadow-none border-2 ${
-                                user.role === 'master' ? 'bg-purple-50 border-purple-100 text-purple-700' : 
-                                user.role === 'configurator' ? 'bg-blue-50 border-blue-100 text-blue-700' :
-                                'bg-slate-100 border-slate-100 text-slate-600'
+                            <Badge variant="outline" className={`text-[11px] font-medium px-1.5 py-0 rounded ${
+                                user.role === 'master' ? 'text-foreground border-foreground/20 bg-foreground/5' : 
+                                user.role === 'configurator' ? 'text-blue-600 border-blue-200 bg-blue-50' :
+                                'text-muted-foreground'
                             }`}>
                                 {user.role === 'configurator' ? 'Config' : user.role}
                             </Badge>
                         </TableCell>
                         <TableCell>
-                            <Badge className={`rounded-lg px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide shadow-none border-2 ${
-                                user.status === 'active' ? 'bg-emerald-50 border-emerald-100 text-emerald-700' : 'bg-slate-100 border-slate-100 text-slate-500'
+                            <Badge variant="outline" className={`text-[11px] font-medium px-1.5 py-0 rounded ${
+                                user.status === 'active' ? 'text-emerald-600 border-emerald-200 bg-emerald-50' : 'text-muted-foreground'
                             }`}>
                                 {user.status}
                             </Badge>
                         </TableCell>
                         <TableCell>
                             {user.groups.length > 0 ? (
-                                <div className="flex gap-1.5">
+                                <div className="flex gap-1">
                                     {user.groups.slice(0, 1).map(g => (
-                                        <React.Fragment key={g}>
-                                            <Badge variant="secondary" className="bg-slate-50 text-slate-600 px-2 py-0.5 rounded-lg text-[10px] font-bold border border-slate-100">{g.replace('ME-','').replace('EE-','').replace('CS-','')}</Badge>
-                                        </React.Fragment>
+                                        <Badge key={g} variant="secondary" className="text-[11px] font-normal px-1.5 py-0 rounded">{g.replace('ME-','').replace('EE-','').replace('CS-','')}</Badge>
                                     ))}
-                                    {user.groups.length > 1 && <span className="text-[10px] font-bold text-slate-400 self-center">+{user.groups.length - 1}</span>}
+                                    {user.groups.length > 1 && <span className="text-xs text-muted-foreground self-center">+{user.groups.length - 1}</span>}
                                 </div>
                             ) : (
-                                <span className="text-[10px] font-bold text-slate-300 italic">None</span>
+                                <span className="text-xs text-muted-foreground">None</span>
                             )}
                         </TableCell>
                         <TableCell>
-                            <div className="text-xs font-bold text-slate-500">
+                            <span className="text-sm text-muted-foreground">
                                 {new Date(user.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                            </div>
+                            </span>
                         </TableCell>
-                        <TableCell className="text-right pr-8">
+                        <TableCell className="text-right pr-5">
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
-                                    <Button variant="ghost" size="icon" className="h-8 w-8 text-slate-300 hover:text-slate-600 hover:bg-slate-100 rounded-lg">
-                                        <MoreVertical className="h-4 w-4" />
+                                    <Button variant="ghost" size="icon" className="h-7 w-7 text-muted-foreground hover:text-foreground rounded-md">
+                                        <MoreVertical className="h-3.5 w-3.5" />
                                     </Button>
                                 </DropdownMenuTrigger>
-                                <DropdownMenuContent align="end" className="rounded-xl border border-slate-100 shadow-xl p-1 w-40">
-                                    <DropdownMenuItem onClick={() => { setEditingUser(user); setFormOpen(true) }} className="rounded-lg font-bold text-xs cursor-pointer">Edit Details</DropdownMenuItem>
-                                    <DropdownMenuItem onClick={() => handleDelete(user.id)} className="rounded-lg font-bold text-xs text-rose-600 focus:text-rose-700 focus:bg-rose-50 cursor-pointer">Remove User</DropdownMenuItem>
+                                <DropdownMenuContent align="end" className="w-36">
+                                    <DropdownMenuItem onClick={() => { setEditingUser(user); setFormOpen(true) }} className="text-sm cursor-pointer">Edit</DropdownMenuItem>
+                                    <DropdownMenuItem onClick={() => handleDelete(user.id)} className="text-sm text-destructive focus:text-destructive cursor-pointer">Remove</DropdownMenuItem>
                                 </DropdownMenuContent>
                             </DropdownMenu>
                         </TableCell>
@@ -187,34 +174,30 @@ export function UsersContent() {
                 ))}
             </TableBody>
         </Table>
+        </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {filtered.map((user) => (
-                <div key={user.id} onClick={() => { setEditingUser(user); setFormOpen(true) }} className="group relative bg-white p-0 rounded-[2.5rem] shadow-sm hover:shadow-xl hover:shadow-blue-100/20 transition-all cursor-pointer flex flex-col overflow-hidden hover:-translate-y-1 border-2 border-slate-200 hover:border-slate-300">
-                    {/* Status Strip */}
-                    <div className={`h-1.5 w-full ${user.status === 'active' ? 'bg-emerald-500' : 'bg-slate-300'}`} />
+                <div key={user.id} onClick={() => { setEditingUser(user); setFormOpen(true) }} className="group bg-card p-5 rounded-lg border border-border hover:border-foreground/20 transition-colors cursor-pointer flex flex-col items-center text-center">
+                    <Avatar className="h-16 w-16 mb-3 border border-border">
+                        <AvatarImage src={user.avatar} className="object-cover" />
+                        <AvatarFallback className="bg-muted text-muted-foreground font-medium text-xl">{user.firstName[0]}</AvatarFallback>
+                    </Avatar>
                     
-                    <div className="p-8 flex flex-col items-center text-center">
-                        <Avatar className="h-24 w-24 mb-5 shadow-lg border-4 border-white ring-1 ring-slate-100">
-                            <AvatarImage src={user.avatar} className="object-cover" />
-                            <AvatarFallback className="bg-slate-100 text-slate-500 font-bold text-3xl">{user.firstName[0]}</AvatarFallback>
-                        </Avatar>
-                        
-                        <h3 className="font-black text-slate-900 text-xl mb-1">{user.firstName} {user.lastName}</h3>
-                        <p className="text-xs font-bold text-slate-400 mb-6 flex items-center gap-1.5 bg-slate-50 px-3 py-1 rounded-full">
-                            <Mail className="h-3 w-3" />
-                            {user.email}
-                        </p>
-                        
-                        <div className="mt-auto flex gap-2 w-full justify-center">
-                             <Badge className={`rounded-xl px-4 py-1.5 text-[10px] font-black uppercase tracking-wide shadow-sm border-2 border-transparent ${
-                                user.role === 'master' ? 'bg-purple-50 text-purple-700 border-purple-100' : 
-                                user.role === 'configurator' ? 'bg-blue-50 text-blue-700 border-blue-100' :
-                                'bg-slate-100 text-slate-600 border-slate-200'
-                            }`}>
-                                {user.role}
-                            </Badge>
-                        </div>
+                    <h3 className="font-medium text-foreground text-sm">{user.firstName} {user.lastName}</h3>
+                    <p className="text-xs text-muted-foreground mt-0.5 flex items-center gap-1">
+                        <Mail className="h-3 w-3" />
+                        {user.email}
+                    </p>
+                    
+                    <div className="mt-3">
+                         <Badge variant="outline" className={`text-[11px] font-medium px-2 py-0.5 rounded ${
+                            user.role === 'master' ? 'text-foreground border-foreground/20 bg-foreground/5' : 
+                            user.role === 'configurator' ? 'text-blue-600 border-blue-200 bg-blue-50' :
+                            'text-muted-foreground'
+                        }`}>
+                            {user.role}
+                        </Badge>
                     </div>
                 </div>
             ))}
@@ -222,10 +205,10 @@ export function UsersContent() {
       )}
 
       {filtered.length > 0 && (
-        <div className="flex items-center justify-center gap-2 mt-8">
-            <Button variant="ghost" size="icon" className="h-10 w-10 rounded-xl text-slate-400 hover:bg-slate-100 border-2 border-transparent hover:border-slate-200"><span className="sr-only">Prev</span>←</Button>
-            <span className="text-xs font-black text-slate-500 uppercase tracking-widest px-4">Page 1 of 14</span>
-            <Button variant="ghost" size="icon" className="h-10 w-10 rounded-xl text-slate-400 hover:bg-slate-100 border-2 border-transparent hover:border-slate-200"><span className="sr-only">Next</span>→</Button>
+        <div className="flex items-center justify-center gap-2 mt-6">
+            <Button variant="ghost" size="icon" className="h-8 w-8 rounded-md text-muted-foreground"><span className="sr-only">Prev</span>{'<'}</Button>
+            <span className="text-xs text-muted-foreground px-3">Page 1 of 14</span>
+            <Button variant="ghost" size="icon" className="h-8 w-8 rounded-md text-muted-foreground"><span className="sr-only">Next</span>{'>'}</Button>
         </div>
       )}
 
