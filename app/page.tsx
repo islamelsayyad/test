@@ -32,9 +32,12 @@ export default function LoginPage() {
     <div className="flex min-h-svh bg-background font-sans">
       {/* Left Panel - Branding */}
       <div className="hidden lg:flex lg:w-[50%] flex-col justify-between bg-foreground p-14 text-primary-foreground relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,hsl(160_84%_39%/0.12),transparent_70%)]" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-[radial-gradient(circle,hsl(160_84%_39%/0.08),transparent_70%)]" />
+        
         <div className="flex items-center gap-3 relative z-10">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/10">
-            <FlaskConical className="h-5 w-5 text-primary-foreground" />
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent text-accent-foreground">
+            <FlaskConical className="h-5 w-5" />
           </div>
           <div className="flex flex-col">
             <p className="text-lg font-semibold tracking-tight text-primary-foreground leading-none">LabNexus</p>
@@ -53,14 +56,14 @@ export default function LoginPage() {
           <div className="flex items-center gap-5 mt-10">
             <div className="flex -space-x-3">
                 {[1,2,3,4].map(i => (
-                    <div key={i} className="h-9 w-9 rounded-full border-2 border-foreground bg-primary-foreground/10 flex items-center justify-center text-[10px] font-medium text-primary-foreground/60">
+                    <div key={i} className="h-9 w-9 rounded-full border-2 border-foreground bg-accent/20 flex items-center justify-center text-[10px] font-medium text-accent">
                         U{i}
                     </div>
                 ))}
             </div>
             <div className="h-8 w-px bg-primary-foreground/10"></div>
             <div className="flex flex-col justify-center">
-                <div className="flex items-center gap-1.5 text-emerald-400 font-medium">
+                <div className="flex items-center gap-1.5 text-accent font-medium">
                     <CheckCircle2 className="h-3.5 w-3.5" />
                     <span className="text-xs">ISO 17025 Ready</span>
                 </div>
@@ -80,7 +83,7 @@ export default function LoginPage() {
         <div className="w-full max-w-sm">
           {/* Mobile logo */}
           <div className="flex items-center gap-2.5 lg:hidden mb-10 justify-center">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-foreground text-primary-foreground">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent text-accent-foreground">
               <FlaskConical className="h-4.5 w-4.5" />
             </div>
             <p className="text-lg font-semibold text-foreground tracking-tight">LabNexus</p>
@@ -141,7 +144,7 @@ export default function LoginPage() {
 
             <Button
               type="submit"
-              className="w-full h-10 bg-foreground text-background hover:bg-foreground/90 text-sm font-medium mt-2"
+              className="w-full h-10 bg-accent text-accent-foreground hover:bg-accent/90 text-sm font-medium mt-2 rounded-lg shadow-sm"
               disabled={loading}
             >
               {loading ? (
@@ -169,11 +172,11 @@ export default function LoginPage() {
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            <Button variant="outline" type="button" className="h-10 text-sm font-medium text-foreground">
+            <Button variant="outline" type="button" className="h-10 text-sm font-medium text-foreground rounded-lg hover:bg-muted transition-all duration-200">
               <Github className="mr-2 h-4 w-4" />
               GitHub
             </Button>
-            <Button variant="outline" type="button" className="h-10 text-sm font-medium text-foreground">
+            <Button variant="outline" type="button" className="h-10 text-sm font-medium text-foreground rounded-lg hover:bg-muted transition-all duration-200">
               <FlaskConical className="mr-2 h-4 w-4" />
               SSO
             </Button>

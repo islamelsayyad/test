@@ -54,7 +54,7 @@ export function UsersContent() {
             Manage user identities, role assignments, and access levels.
           </p>
         </div>
-        <Button onClick={() => { setEditingUser(null); setFormOpen(true) }} className="h-9 px-3.5 text-sm font-medium bg-foreground text-background hover:bg-foreground/90">
+        <Button onClick={() => { setEditingUser(null); setFormOpen(true) }} className="h-9 px-3.5 text-sm font-medium bg-accent text-accent-foreground hover:bg-accent/90 rounded-lg shadow-sm">
             <Plus className="mr-1.5 h-3.5 w-3.5" />
             Add Personnel
         </Button>
@@ -97,10 +97,10 @@ export function UsersContent() {
             <Button variant="outline" size="sm" onClick={() => { setSearch(""); setRoleFilter("all"); setStatusFilter("all"); }}>Clear Filters</Button>
         </div>
       ) : viewMode === "list" ? (
-        <div className="border border-border rounded-lg overflow-hidden">
+        <div className="border border-border rounded-xl overflow-hidden">
         <Table>
             <TableHeader>
-                <TableRow className="hover:bg-transparent">
+                <TableRow className="hover:bg-transparent bg-muted/30">
                     <TableHead className="pl-5 h-10 text-xs font-medium text-muted-foreground">Identity</TableHead>
                     <TableHead className="h-10 text-xs font-medium text-muted-foreground">Role</TableHead>
                     <TableHead className="h-10 text-xs font-medium text-muted-foreground">Status</TableHead>
@@ -114,9 +114,9 @@ export function UsersContent() {
                     <TableRow key={user.id} className="cursor-pointer">
                         <TableCell className="pl-5 py-3">
                             <div className="flex items-center gap-3">
-                                <Avatar className="h-8 w-8 rounded-md border border-border">
+                                <Avatar className="h-8 w-8 rounded-lg border border-border">
                                     <AvatarImage src={user.avatar} />
-                                    <AvatarFallback className="bg-muted text-muted-foreground font-medium text-xs rounded-md">{user.firstName[0]}</AvatarFallback>
+                                    <AvatarFallback className="bg-accent/10 text-accent font-medium text-xs rounded-lg">{user.firstName[0]}</AvatarFallback>
                                 </Avatar>
                                 <div>
                                     <div className="text-sm font-medium text-foreground">{user.firstName} {user.lastName}</div>
@@ -125,17 +125,17 @@ export function UsersContent() {
                             </div>
                         </TableCell>
                         <TableCell>
-                            <Badge variant="outline" className={`text-[11px] font-medium px-1.5 py-0 rounded ${
+                            <Badge variant="outline" className={`text-[11px] font-medium px-1.5 py-0 rounded-full ${
                                 user.role === 'master' ? 'text-foreground border-foreground/20 bg-foreground/5' : 
-                                user.role === 'configurator' ? 'text-blue-600 border-blue-200 bg-blue-50' :
+                                user.role === 'configurator' ? 'text-accent border-accent/20 bg-accent/10' :
                                 'text-muted-foreground'
                             }`}>
                                 {user.role === 'configurator' ? 'Config' : user.role}
                             </Badge>
                         </TableCell>
                         <TableCell>
-                            <Badge variant="outline" className={`text-[11px] font-medium px-1.5 py-0 rounded ${
-                                user.status === 'active' ? 'text-emerald-600 border-emerald-200 bg-emerald-50' : 'text-muted-foreground'
+                            <Badge variant="outline" className={`text-[11px] font-medium px-1.5 py-0 rounded-full ${
+                                user.status === 'active' ? 'text-accent border-accent/20 bg-accent/10' : 'text-muted-foreground'
                             }`}>
                                 {user.status}
                             </Badge>
@@ -178,7 +178,7 @@ export function UsersContent() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {filtered.map((user) => (
-                <div key={user.id} onClick={() => { setEditingUser(user); setFormOpen(true) }} className="group bg-card p-5 rounded-lg border border-border hover:border-foreground/20 transition-colors cursor-pointer flex flex-col items-center text-center">
+                <div key={user.id} onClick={() => { setEditingUser(user); setFormOpen(true) }} className="group bg-card p-5 rounded-xl border border-border hover:border-accent/30 hover:shadow-sm transition-all duration-200 cursor-pointer flex flex-col items-center text-center">
                     <Avatar className="h-16 w-16 mb-3 border border-border">
                         <AvatarImage src={user.avatar} className="object-cover" />
                         <AvatarFallback className="bg-muted text-muted-foreground font-medium text-xl">{user.firstName[0]}</AvatarFallback>
@@ -191,9 +191,9 @@ export function UsersContent() {
                     </p>
                     
                     <div className="mt-3">
-                         <Badge variant="outline" className={`text-[11px] font-medium px-2 py-0.5 rounded ${
+                         <Badge variant="outline" className={`text-[11px] font-medium px-2 py-0.5 rounded-full ${
                             user.role === 'master' ? 'text-foreground border-foreground/20 bg-foreground/5' : 
-                            user.role === 'configurator' ? 'text-blue-600 border-blue-200 bg-blue-50' :
+                            user.role === 'configurator' ? 'text-accent border-accent/20 bg-accent/10' :
                             'text-muted-foreground'
                         }`}>
                             {user.role}

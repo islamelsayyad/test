@@ -81,13 +81,13 @@ export function DashboardContent() {
           </p>
         </div>
         <div className="flex gap-2">
-          <Button size="sm" asChild className="h-9 px-3.5 text-sm font-medium bg-foreground text-background hover:bg-foreground/90">
+          <Button size="sm" asChild className="h-9 px-3.5 text-sm font-medium bg-accent text-accent-foreground hover:bg-accent/90 rounded-lg shadow-sm">
             <Link href="/labs">
               <Plus className="mr-1.5 h-3.5 w-3.5" />
               New Lab
             </Link>
           </Button>
-          <Button size="sm" variant="outline" asChild className="h-9 px-3.5 text-sm font-medium">
+          <Button size="sm" variant="outline" asChild className="h-9 px-3.5 text-sm font-medium rounded-lg">
             <Link href="/equipment">
               <Plus className="mr-1.5 h-3.5 w-3.5" />
               Add Asset
@@ -100,13 +100,13 @@ export function DashboardContent() {
       <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {kpiCards.map((kpi) => (
           <Link href={kpi.href} key={kpi.title}>
-            <Card className="group hover:border-foreground/20 transition-colors h-full">
+            <Card className="group hover:border-accent/30 hover:shadow-sm transition-all duration-200 h-full rounded-xl">
               <CardContent className="p-5">
                 <div className="flex justify-between items-start mb-4">
-                   <div className="h-9 w-9 rounded-lg flex items-center justify-center bg-muted text-muted-foreground">
+                   <div className="h-9 w-9 rounded-xl flex items-center justify-center bg-accent/10 text-accent">
                       <kpi.icon className="h-4.5 w-4.5" />
                    </div>
-                   <Badge variant="outline" className={`text-[11px] font-medium px-1.5 py-0.5 rounded-md ${kpi.trend > 0 ? "text-emerald-600 border-emerald-200 bg-emerald-50" : kpi.trend < 0 ? "text-destructive border-destructive/20 bg-destructive/5" : "text-muted-foreground"}`}>
+                   <Badge variant="outline" className={`text-[11px] font-medium px-1.5 py-0.5 rounded-full ${kpi.trend > 0 ? "text-emerald-600 border-emerald-200 bg-emerald-50" : kpi.trend < 0 ? "text-destructive border-destructive/20 bg-destructive/5" : "text-muted-foreground"}`}>
                       {kpi.trend > 0 ? <TrendingUp className="mr-0.5 h-3 w-3" /> : kpi.trend < 0 ? <TrendingDown className="mr-0.5 h-3 w-3" /> : null}
                       {Math.abs(kpi.trend)}%
                    </Badge>
@@ -123,26 +123,26 @@ export function DashboardContent() {
       <div className="grid gap-4 lg:grid-cols-3">
         
         {/* Today's Sessions */}
-        <Card className="lg:col-span-1 bg-foreground text-primary-foreground border-foreground overflow-hidden flex flex-col">
+        <Card className="lg:col-span-1 bg-foreground text-primary-foreground border-foreground overflow-hidden flex flex-col rounded-xl">
           <div className="p-5 h-full flex flex-col">
              <div className="flex justify-between items-start mb-6">
                 <div>
                     <h3 className="text-lg font-semibold tracking-tight leading-none mb-2">Today{"'"}s Sessions</h3>
-                    <div className="inline-flex items-center bg-primary-foreground/10 px-2 py-1 rounded-md text-primary-foreground/70">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5" />
+                    <div className="inline-flex items-center bg-accent/20 px-2 py-1 rounded-full text-accent">
+                        <span className="w-1.5 h-1.5 rounded-full bg-accent mr-1.5" />
                         <span className="text-xs">{todaySessions.length} events scheduled</span>
                     </div>
                 </div>
-                <Link href="/scheduling" className="h-8 w-8 flex items-center justify-center bg-primary-foreground/10 hover:bg-primary-foreground/20 rounded-md transition-colors">
+                <Link href="/scheduling" className="h-8 w-8 flex items-center justify-center bg-primary-foreground/10 hover:bg-accent/20 rounded-lg transition-all duration-200">
                     <ArrowRight className="h-4 w-4 text-primary-foreground" />
                 </Link>
              </div>
 
              <div className="space-y-2 flex-1">
                 {todaySessions.slice(0, 3).map((session) => (
-                    <div key={session.id} className="flex items-center gap-3 p-2.5 bg-primary-foreground/5 rounded-lg hover:bg-primary-foreground/10 transition-colors">
-                        <div className="flex flex-col items-center justify-center w-10 h-10 bg-primary-foreground text-foreground rounded-md shrink-0 leading-none">
-                            <span className="text-[9px] font-medium uppercase text-foreground/60">{new Date(session.date).toLocaleDateString("en-US", { month: "short" })}</span>
+                    <div key={session.id} className="flex items-center gap-3 p-2.5 bg-primary-foreground/5 rounded-xl hover:bg-primary-foreground/10 transition-all duration-200">
+                        <div className="flex flex-col items-center justify-center w-10 h-10 bg-accent text-accent-foreground rounded-lg shrink-0 leading-none">
+                            <span className="text-[9px] font-medium uppercase text-accent-foreground/70">{new Date(session.date).toLocaleDateString("en-US", { month: "short" })}</span>
                             <span className="text-sm font-semibold">{new Date(session.date).getDate()}</span>
                         </div>
                         <div className="min-w-0">
@@ -163,18 +163,18 @@ export function DashboardContent() {
         </Card>
 
         {/* Pending Bookings */}
-        <Card className="lg:col-span-1 overflow-hidden flex flex-col">
+        <Card className="lg:col-span-1 overflow-hidden flex flex-col rounded-xl">
           <CardHeader className="pb-3 pt-5 px-5 border-b border-border">
             <div className="flex items-center justify-between">
               <CardTitle className="text-sm font-medium text-foreground flex items-center gap-2">
                 Pending Requests
                 {pendingBookings.length > 0 && (
-                  <span className="flex h-5 min-w-5 items-center justify-center rounded-md bg-foreground text-[10px] font-medium text-background px-1.5">
+                  <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-accent text-[10px] font-medium text-accent-foreground px-1.5">
                     {pendingBookings.length}
                   </span>
                 )}
               </CardTitle>
-              <Button variant="ghost" size="icon" className="h-7 w-7 rounded-md text-muted-foreground hover:text-foreground" asChild>
+              <Button variant="ghost" size="icon" className="h-7 w-7 rounded-lg text-muted-foreground hover:text-foreground" asChild>
                 <Link href="/scheduling"><MoreHorizontal className="h-4 w-4" /></Link>
               </Button>
             </div>
@@ -182,8 +182,8 @@ export function DashboardContent() {
           <CardContent className="p-4 flex-1">
             <div className="space-y-1">
               {pendingBookings.slice(0, 4).map((booking) => (
-                <div key={booking.id} className="flex items-center gap-3 p-2.5 hover:bg-muted rounded-md transition-colors cursor-pointer">
-                  <Avatar className="h-8 w-8 border border-border rounded-md">
+                <div key={booking.id} className="flex items-center gap-3 p-2.5 hover:bg-muted rounded-lg transition-all duration-200 cursor-pointer">
+                  <Avatar className="h-8 w-8 border border-border rounded-lg">
                     <AvatarImage src="/placeholder.svg?height=40&width=40" />
                     <AvatarFallback className="bg-muted text-muted-foreground font-medium text-[10px] rounded-md">
                       {booking.userName.split(" ").map((n) => n[0]).join("")}
@@ -211,13 +211,13 @@ export function DashboardContent() {
         </Card>
 
         {/* Calibration Due */}
-        <Card className="lg:col-span-1 overflow-hidden flex flex-col">
+        <Card className="lg:col-span-1 overflow-hidden flex flex-col rounded-xl">
           <CardHeader className="pb-3 pt-5 px-5 border-b border-border">
             <div className="flex items-center justify-between">
               <CardTitle className="text-sm font-medium text-foreground flex items-center gap-2">
                 Calibration Due
               </CardTitle>
-              <Button variant="ghost" size="icon" className="h-7 w-7 rounded-md text-muted-foreground hover:text-foreground" asChild>
+              <Button variant="ghost" size="icon" className="h-7 w-7 rounded-lg text-muted-foreground hover:text-foreground" asChild>
                 <Link href="/equipment"><MoreHorizontal className="h-4 w-4" /></Link>
               </Button>
             </div>
@@ -232,15 +232,15 @@ export function DashboardContent() {
                 const isOverdue = daysUntil < 0
                 const isSoon = daysUntil <= 30
                 return (
-                  <div key={eq.id} className="flex items-center gap-3 p-2.5 hover:bg-muted rounded-md transition-colors cursor-pointer">
-                    <div className={`h-8 w-8 rounded-md flex items-center justify-center ${isOverdue ? "bg-destructive/10 text-destructive" : isSoon ? "bg-amber-50 text-amber-600" : "bg-emerald-50 text-emerald-600"}`}>
+                  <div key={eq.id} className="flex items-center gap-3 p-2.5 hover:bg-muted rounded-lg transition-all duration-200 cursor-pointer">
+                    <div className={`h-8 w-8 rounded-lg flex items-center justify-center ${isOverdue ? "bg-destructive/10 text-destructive" : isSoon ? "bg-amber-50 text-amber-600" : "bg-accent/10 text-accent"}`}>
                         <Wrench className="h-4 w-4" />
                     </div>
                     <div className="min-w-0 flex-1">
                       <p className="truncate text-sm text-foreground">{eq.name}</p>
                       <p className="text-xs text-muted-foreground">{eq.labName}</p>
                     </div>
-                    <Badge variant="outline" className={`text-[10px] font-medium px-1.5 py-0 rounded ${isOverdue ? "text-destructive border-destructive/20" : isSoon ? "text-amber-600 border-amber-200" : "text-emerald-600 border-emerald-200"}`}>
+                    <Badge variant="outline" className={`text-[10px] font-medium px-1.5 py-0 rounded-full ${isOverdue ? "text-destructive border-destructive/20" : isSoon ? "text-amber-600 border-amber-200" : "text-accent border-accent/20"}`}>
                       {isOverdue ? `${Math.abs(daysUntil)}d overdue` : `${daysUntil}d left`}
                     </Badge>
                   </div>
@@ -252,7 +252,7 @@ export function DashboardContent() {
       </div>
 
       {/* Activity Feed */}
-      <Card className="mt-4 overflow-hidden">
+      <Card className="mt-4 overflow-hidden rounded-xl">
         <CardHeader className="pb-3 pt-5 px-5 border-b border-border">
           <CardTitle className="text-sm font-medium text-foreground">Recent Activity</CardTitle>
         </CardHeader>

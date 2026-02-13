@@ -24,10 +24,10 @@ interface DashboardHeaderProps {
 
 export function DashboardHeader({ title, breadcrumbs }: DashboardHeaderProps) {
   return (
-    <header className="sticky top-0 z-30 flex h-14 items-center px-4 lg:px-6 bg-card/80 backdrop-blur-sm border-b border-border">
+    <header className="sticky top-0 z-30 flex h-14 items-center px-4 lg:px-6 bg-card/90 backdrop-blur-md border-b border-border">
       <div className="flex items-center gap-3 w-full">
         <div className="flex items-center gap-3">
-            <SidebarTrigger className="-ml-1 text-muted-foreground hover:text-foreground h-8 w-8 rounded-md transition-colors" />
+            <SidebarTrigger className="-ml-1 text-muted-foreground hover:text-foreground h-8 w-8 rounded-lg transition-colors" />
             <Separator orientation="vertical" className="h-5 hidden md:block" />
             
             <div className="hidden md:block">
@@ -56,7 +56,7 @@ export function DashboardHeader({ title, breadcrumbs }: DashboardHeaderProps) {
         </div>
         
         <div className="flex-1 max-w-md mx-auto">
-            <div className="hidden md:flex items-center gap-2.5 px-3 py-1.5 bg-muted/50 hover:bg-muted rounded-md border border-transparent hover:border-border transition-colors cursor-text h-9">
+            <div className="hidden md:flex items-center gap-2.5 px-3 py-1.5 bg-muted/60 hover:bg-muted rounded-lg border border-transparent hover:border-border transition-all duration-200 cursor-text h-9">
                 <Search className="h-3.5 w-3.5 text-muted-foreground" />
                 <span className="text-sm text-muted-foreground">Search...</span>
                 <kbd className="ml-auto flex items-center gap-0.5 text-[10px] text-muted-foreground font-mono bg-background px-1.5 py-0.5 rounded border border-border">
@@ -66,14 +66,14 @@ export function DashboardHeader({ title, breadcrumbs }: DashboardHeaderProps) {
         </div>
 
         <div className="ml-auto flex items-center gap-2">
-            <Button variant="ghost" size="icon" className="relative h-8 w-8 text-muted-foreground hover:text-foreground rounded-md">
+            <Button variant="ghost" size="icon" className="relative h-8 w-8 text-muted-foreground hover:text-foreground rounded-lg">
                 <Bell className="h-4 w-4" />
-                <span className="absolute top-1.5 right-1.5 flex h-1.5 w-1.5 rounded-full bg-destructive"></span>
+                <span className="absolute top-1.5 right-1.5 flex h-2 w-2 rounded-full bg-accent ring-2 ring-card"></span>
                 <span className="sr-only">Notifications</span>
             </Button>
             
             <Link href="/profile">
-              <div className="flex items-center gap-2.5 pl-2 pr-1 py-1 rounded-md hover:bg-muted transition-colors cursor-pointer">
+              <div className="flex items-center gap-2.5 pl-2 pr-1 py-1 rounded-lg hover:bg-muted transition-all duration-200 cursor-pointer">
                   <div className="hidden text-right sm:block leading-none">
                       <p className="text-sm font-medium text-foreground">{currentUser.firstName}</p>
                       <p className="text-[11px] text-muted-foreground mt-0.5">{currentUser.role === 'master' ? 'Admin' : currentUser.role}</p>

@@ -52,7 +52,7 @@ export function SchedulingContent() {
             Master planning board for classes, maintenance, and facility usage.
           </p>
         </div>
-        <Button onClick={() => setFormOpen(true)} className="h-9 px-3.5 text-sm font-medium bg-foreground text-background hover:bg-foreground/90">
+        <Button onClick={() => setFormOpen(true)} className="h-9 px-3.5 text-sm font-medium bg-accent text-accent-foreground hover:bg-accent/90 rounded-lg shadow-sm">
             <Plus className="mr-1.5 h-3.5 w-3.5" />
             New Block
         </Button>
@@ -84,10 +84,10 @@ export function SchedulingContent() {
       </div>
 
       {viewMode === "list" ? (
-        <div className="border border-border rounded-lg overflow-hidden">
+        <div className="border border-border rounded-xl overflow-hidden">
         <Table>
             <TableHeader>
-                <TableRow className="hover:bg-transparent">
+                <TableRow className="hover:bg-transparent bg-muted/30">
                     <TableHead className="w-[100px] pl-5 h-10 text-xs font-medium text-muted-foreground">Status</TableHead>
                     <TableHead className="h-10 text-xs font-medium text-muted-foreground">Date & Time</TableHead>
                     <TableHead className="h-10 text-xs font-medium text-muted-foreground">User / Group</TableHead>
@@ -100,8 +100,8 @@ export function SchedulingContent() {
                 {bookings.map((booking) => (
                     <TableRow key={booking.id} onClick={() => { setSelectedBooking(booking); setDetailOpen(true) }} className="cursor-pointer">
                         <TableCell className="pl-5 py-3">
-                            <Badge variant="outline" className={`text-[11px] font-medium px-1.5 py-0 rounded ${
-                                booking.status === 'approved' ? 'text-blue-600 border-blue-200 bg-blue-50' : 
+                            <Badge variant="outline" className={`text-[11px] font-medium px-1.5 py-0 rounded-full ${
+                                booking.status === 'approved' ? 'text-accent border-accent/20 bg-accent/10' : 
                                 booking.status === 'pending' ? 'text-amber-600 border-amber-200 bg-amber-50' :
                                 booking.status === 'rejected' ? 'text-destructive border-destructive/20 bg-destructive/5' :
                                 'text-muted-foreground'
@@ -146,7 +146,7 @@ export function SchedulingContent() {
         </Table>
         </div>
       ) : (
-        <Card className="overflow-hidden">
+        <Card className="overflow-hidden rounded-xl">
           <CardContent className="overflow-x-auto p-0">
             <div className="min-w-[900px]">
               {/* Header */}
@@ -158,9 +158,9 @@ export function SchedulingContent() {
                   const d = new Date(date + "T12:00:00")
                   const isToday = date === "2026-02-13" 
                   return (
-                    <div key={date} className={`p-3 text-center border-r border-border last:border-r-0 ${isToday ? "bg-blue-50/50" : ""}`}>
-                      <div className={`text-[11px] uppercase tracking-wider mb-0.5 ${isToday ? "text-blue-600 font-medium" : "text-muted-foreground"}`}>{d.toLocaleDateString("en-US", { weekday: "short" })}</div>
-                      <div className={`text-lg font-semibold ${isToday ? "text-blue-600" : "text-foreground"}`}>{d.getDate()}</div>
+                    <div key={date} className={`p-3 text-center border-r border-border last:border-r-0 ${isToday ? "bg-accent/5" : ""}`}>
+                      <div className={`text-[11px] uppercase tracking-wider mb-0.5 ${isToday ? "text-accent font-medium" : "text-muted-foreground"}`}>{d.toLocaleDateString("en-US", { weekday: "short" })}</div>
+                      <div className={`text-lg font-semibold ${isToday ? "text-accent" : "text-foreground"}`}>{d.getDate()}</div>
                     </div>
                   )
                 })}
@@ -183,7 +183,7 @@ export function SchedulingContent() {
                     })
                     
                     return (
-                      <div key={date} className={`relative border-r border-border last:border-r-0 p-0.5 hover:bg-muted/30 transition-colors ${isToday ? "bg-blue-50/20" : ""}`}>
+                      <div key={date} className={`relative border-r border-border last:border-r-0 p-0.5 hover:bg-muted/30 transition-colors ${isToday ? "bg-accent/[0.03]" : ""}`}>
                         {slotBookings.map((booking) => {
                           const startHour = parseInt(booking.startTime.split(":")[0])
                           if (startHour !== hour) return null 
@@ -197,10 +197,10 @@ export function SchedulingContent() {
                           return (
                             <button
                               key={booking.id}
-                              className={`absolute top-0.5 left-0.5 right-0.5 rounded-md p-2 text-left z-10 transition-colors flex flex-col overflow-hidden border-l-[3px] text-xs ${
+                              className={`absolute top-0.5 left-0.5 right-0.5 rounded-lg p-2 text-left z-10 transition-all duration-200 flex flex-col overflow-hidden border-l-[3px] text-xs ${
                                 isRejected ? "bg-destructive/5 border-destructive/40 text-destructive hover:bg-destructive/10" :
                                 isPending ? "bg-amber-50 border-amber-400 text-amber-800 hover:bg-amber-100" :
-                                "bg-blue-50 border-blue-500 text-blue-800 hover:bg-blue-100"
+                                "bg-accent/10 border-accent text-foreground hover:bg-accent/15"
                               }`}
                               style={{ height: `${height}px` }}
                               onClick={() => { setSelectedBooking(booking); setDetailOpen(true) }}

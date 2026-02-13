@@ -33,7 +33,7 @@ export function SettingsContent() {
             Manage global parameters, security policies, and operational rules.
           </p>
         </div>
-        <Button className="h-9 px-3.5 text-sm font-medium bg-foreground text-background hover:bg-foreground/90">
+        <Button className="h-9 px-3.5 text-sm font-medium bg-accent text-accent-foreground hover:bg-accent/90 rounded-lg shadow-sm">
           <Save className="mr-1.5 h-3.5 w-3.5" />
           Save Changes
         </Button>
@@ -112,7 +112,7 @@ export function SettingsContent() {
           <Card>
             <CardHeader className="pb-4">
                 <div className="flex items-center gap-3">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-muted text-muted-foreground">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent/10 text-accent">
                         <ShieldCheck className="h-4.5 w-4.5" />
                     </div>
                     <div>
@@ -142,7 +142,7 @@ export function SettingsContent() {
 
               <div className="flex items-center justify-between p-4 bg-muted/50 rounded-lg border border-border">
                 <div className="flex gap-3 items-center">
-                    <div className="h-9 w-9 rounded-lg bg-background flex items-center justify-center border border-border text-muted-foreground">
+                    <div className="h-9 w-9 rounded-xl bg-accent/10 flex items-center justify-center text-accent">
                         <Smartphone className="h-4.5 w-4.5" />
                     </div>
                     <div>
@@ -162,7 +162,7 @@ export function SettingsContent() {
           <Card className={maintenanceMode ? "border-amber-200 bg-amber-50/50" : ""}>
             <CardContent className="p-5 flex items-center justify-between">
               <div className="flex gap-4 items-center">
-                 <div className={`flex h-10 w-10 items-center justify-center rounded-lg border ${maintenanceMode ? "bg-amber-100 border-amber-200 text-amber-600" : "bg-muted text-muted-foreground border-border"}`}>
+                 <div className={`flex h-10 w-10 items-center justify-center rounded-xl border ${maintenanceMode ? "bg-amber-100 border-amber-200 text-amber-600" : "bg-accent/10 text-accent border-accent/20"}`}>
                     <AlertOctagon className="h-5 w-5" />
                  </div>
                  <div>

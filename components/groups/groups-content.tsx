@@ -46,7 +46,7 @@ export function GroupsContent() {
             Manage student groups, academic programs, and semester assignments.
           </p>
         </div>
-        <Button onClick={() => { setEditingGroup(null); setFormOpen(true) }} className="h-9 px-3.5 text-sm font-medium bg-foreground text-background hover:bg-foreground/90">
+        <Button onClick={() => { setEditingGroup(null); setFormOpen(true) }} className="h-9 px-3.5 text-sm font-medium bg-accent text-accent-foreground hover:bg-accent/90 rounded-lg shadow-sm">
           <Plus className="mr-1.5 h-3.5 w-3.5" />
           New Cohort
         </Button>
@@ -88,10 +88,10 @@ export function GroupsContent() {
             <Button variant="outline" size="sm">Clear Filters</Button>
         </div>
       ) : viewMode === "list" ? (
-        <div className="border border-border rounded-lg overflow-hidden">
+        <div className="border border-border rounded-xl overflow-hidden">
         <Table>
             <TableHeader>
-                <TableRow className="hover:bg-transparent">
+                <TableRow className="hover:bg-transparent bg-muted/30">
                     <TableHead className="pl-5 h-10 text-xs font-medium text-muted-foreground">Cohort</TableHead>
                     <TableHead className="h-10 text-xs font-medium text-muted-foreground">Program</TableHead>
                     <TableHead className="h-10 text-xs font-medium text-muted-foreground">Academic Year</TableHead>
@@ -105,7 +105,7 @@ export function GroupsContent() {
                     <TableRow key={group.id} onClick={() => { setSelected(group); setDetailOpen(true) }} className="cursor-pointer">
                         <TableCell className="pl-5 py-3">
                             <div className="flex items-center gap-3">
-                                <div className="h-8 w-8 rounded-md bg-muted flex items-center justify-center text-muted-foreground">
+                                <div className="h-8 w-8 rounded-lg bg-accent/10 flex items-center justify-center text-accent">
                                     <UsersRound className="h-4 w-4" />
                                 </div>
                                 <div>
@@ -126,7 +126,7 @@ export function GroupsContent() {
                             </div>
                         </TableCell>
                         <TableCell>
-                            <Badge variant="outline" className="text-[11px] font-medium px-1.5 py-0 rounded text-emerald-600 border-emerald-200 bg-emerald-50">
+                            <Badge variant="outline" className="text-[11px] font-medium px-1.5 py-0 rounded-full text-accent border-accent/20 bg-accent/10">
                                 Active
                             </Badge>
                         </TableCell>
@@ -143,12 +143,12 @@ export function GroupsContent() {
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {groupsList.map((group) => (
-                <div key={group.id} onClick={() => { setSelected(group); setDetailOpen(true) }} className="group bg-card rounded-lg p-5 border border-border hover:border-foreground/20 transition-colors cursor-pointer flex flex-col">
+                <div key={group.id} onClick={() => { setSelected(group); setDetailOpen(true) }} className="group bg-card rounded-xl p-5 border border-border hover:border-accent/30 hover:shadow-sm transition-all duration-200 cursor-pointer flex flex-col">
                     <div className="flex justify-between items-start mb-4">
-                        <div className="h-9 w-9 rounded-lg bg-muted flex items-center justify-center text-muted-foreground">
+                        <div className="h-9 w-9 rounded-xl bg-accent/10 flex items-center justify-center text-accent">
                             <UsersRound className="h-4.5 w-4.5" />
                         </div>
-                        <Badge variant="outline" className="text-[11px] font-medium px-1.5 py-0 rounded text-emerald-600 border-emerald-200 bg-emerald-50">
+                        <Badge variant="outline" className="text-[11px] font-medium px-1.5 py-0 rounded-full text-accent border-accent/20 bg-accent/10">
                             Active
                         </Badge>
                     </div>

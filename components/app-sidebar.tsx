@@ -50,12 +50,12 @@ export function AppSidebar() {
   return (
     <Sidebar className="border-r border-sidebar-border bg-sidebar">
       <SidebarHeader className="p-5 pb-4">
-        <Link href="/dashboard" className="flex items-center gap-2.5 px-2 py-1.5 rounded-md transition-colors hover:bg-sidebar-accent">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-foreground text-primary-foreground">
+        <Link href="/dashboard" className="flex items-center gap-2.5 px-2 py-1.5 rounded-lg transition-colors hover:bg-sidebar-accent">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent text-accent-foreground">
             <FlaskConical className="h-4 w-4" />
           </div>
           <div className="flex flex-col">
-            <p className="text-sm font-semibold tracking-tight text-sidebar-foreground leading-none">LabNexus</p>
+            <p className="text-sm font-semibold tracking-tight text-sidebar-primary-foreground leading-none">LabNexus</p>
             <p className="text-[10px] text-sidebar-foreground/50 mt-0.5">Research OS</p>
           </div>
         </Link>
@@ -76,17 +76,17 @@ export function AppSidebar() {
                       asChild 
                       isActive={isActive} 
                       tooltip={item.title}
-                      className={`h-9 rounded-md px-3 transition-colors ${
+                      className={`h-9 rounded-lg px-3 transition-all duration-200 ${
                         isActive 
-                          ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium" 
-                          : "text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                          ? "bg-accent text-accent-foreground font-medium shadow-sm" 
+                          : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                       }`}
                     >
                       <Link href={item.url} className="flex items-center gap-2.5">
-                        <item.icon className={`h-4 w-4 ${isActive ? "text-sidebar-accent-foreground" : "text-sidebar-foreground/50"}`} />
+                        <item.icon className={`h-4 w-4 ${isActive ? "text-accent-foreground" : "text-sidebar-foreground/60"}`} />
                         <span className="text-[13px]">{item.title}</span>
                         {item.badge && (
-                          <Badge variant="secondary" className={`ml-auto h-5 min-w-5 justify-center px-1.5 rounded-md text-[10px] font-medium shadow-none border-none ${isActive ? 'bg-sidebar-foreground/10 text-sidebar-accent-foreground' : 'bg-sidebar-accent text-sidebar-foreground/60'}`}>
+                          <Badge variant="secondary" className={`ml-auto h-5 min-w-5 justify-center px-1.5 rounded-full text-[10px] font-medium shadow-none border-none ${isActive ? 'bg-accent-foreground/20 text-accent-foreground' : 'bg-sidebar-accent text-sidebar-foreground/70'}`}>
                             {item.badge}
                           </Badge>
                         )}
@@ -113,14 +113,14 @@ export function AppSidebar() {
                       asChild 
                       isActive={isActive} 
                       tooltip={item.title}
-                      className={`h-9 rounded-md px-3 transition-colors ${
+                      className={`h-9 rounded-lg px-3 transition-all duration-200 ${
                         isActive 
-                          ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium" 
-                          : "text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                          ? "bg-accent text-accent-foreground font-medium shadow-sm" 
+                          : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                       }`}
                     >
                       <Link href={item.url} className="flex items-center gap-2.5">
-                        <item.icon className={`h-4 w-4 ${isActive ? "text-sidebar-accent-foreground" : "text-sidebar-foreground/50"}`} />
+                        <item.icon className={`h-4 w-4 ${isActive ? "text-accent-foreground" : "text-sidebar-foreground/60"}`} />
                         <span className="text-[13px]">{item.title}</span>
                       </Link>
                     </SidebarMenuButton>
@@ -135,7 +135,7 @@ export function AppSidebar() {
       <SidebarFooter className="p-3">
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild className="h-9 rounded-md px-3 text-sidebar-foreground/60 hover:bg-destructive/5 hover:text-destructive transition-colors">
+            <SidebarMenuButton asChild className="h-9 rounded-lg px-3 text-sidebar-foreground/60 hover:bg-destructive/10 hover:text-red-400 transition-all duration-200">
               <Link href="/">
                 <LogOut className="h-4 w-4" />
                 <span className="text-[13px]">Sign Out</span>

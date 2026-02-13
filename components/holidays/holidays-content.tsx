@@ -47,7 +47,7 @@ export function HolidaysContent() {
             Manage lab closure dates and maintenance windows.
           </p>
         </div>
-        <Button onClick={() => { setEditingHoliday(null); setFormOpen(true) }} className="h-9 px-3.5 text-sm font-medium bg-foreground text-background hover:bg-foreground/90">
+        <Button onClick={() => { setEditingHoliday(null); setFormOpen(true) }} className="h-9 px-3.5 text-sm font-medium bg-accent text-accent-foreground hover:bg-accent/90 rounded-lg shadow-sm">
           <Plus className="mr-1.5 h-3.5 w-3.5" />
           Add Event
         </Button>
@@ -65,9 +65,9 @@ export function HolidaysContent() {
           const config = typeConfig[holiday.type] || typeConfig.public
 
           return (
-            <div key={holiday.id} className="group flex flex-col sm:flex-row bg-card rounded-lg border border-border hover:border-foreground/20 transition-colors overflow-hidden">
+            <div key={holiday.id} className="group flex flex-col sm:flex-row bg-card rounded-xl border border-border hover:border-accent/30 hover:shadow-sm transition-all duration-200 overflow-hidden">
                 {/* Date Stub */}
-                <div className="flex-shrink-0 w-full sm:w-28 bg-muted/50 border-b sm:border-b-0 sm:border-r border-border flex flex-col items-center justify-center p-4 text-center">
+                <div className="flex-shrink-0 w-full sm:w-28 bg-muted/40 border-b sm:border-b-0 sm:border-r border-border flex flex-col items-center justify-center p-4 text-center">
                    <span className="text-[11px] text-muted-foreground uppercase">
                       {startDate.toLocaleDateString("en-US", { month: "short" })}
                    </span>

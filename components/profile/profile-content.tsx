@@ -27,8 +27,10 @@ export function ProfileContent() {
       <div className="max-w-4xl mx-auto space-y-6">
         
         {/* Profile Header */}
-        <div className="relative rounded-lg bg-card border border-border overflow-hidden">
-            <div className="h-32 bg-foreground" />
+        <div className="relative rounded-xl bg-card border border-border overflow-hidden">
+            <div className="h-32 bg-foreground relative overflow-hidden">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,hsl(160_84%_39%/0.2),transparent_70%)]" />
+            </div>
 
             <div className="relative px-6 pb-6 -mt-12">
                 <div className="flex flex-col sm:flex-row items-start gap-5">
@@ -39,7 +41,7 @@ export function ProfileContent() {
                             {currentUser.firstName[0]}{currentUser.lastName[0]}
                             </AvatarFallback>
                         </Avatar>
-                        <Button size="icon" className="absolute -bottom-1 -right-1 h-8 w-8 rounded-md bg-foreground text-background hover:bg-foreground/90 border-2 border-card">
+                        <Button size="icon" className="absolute -bottom-1 -right-1 h-8 w-8 rounded-lg bg-accent text-accent-foreground hover:bg-accent/90 border-2 border-card">
                             <Camera className="h-3.5 w-3.5" />
                         </Button>
                     </div>
@@ -58,7 +60,7 @@ export function ProfileContent() {
                                     </Badge>
                                 </div>
                             </div>
-                            <Button size="sm" className="h-9 px-3.5 text-sm font-medium bg-foreground text-background hover:bg-foreground/90">
+                            <Button size="sm" className="h-9 px-3.5 text-sm font-medium bg-accent text-accent-foreground hover:bg-accent/90 rounded-lg shadow-sm">
                                 <UserCog className="mr-1.5 h-3.5 w-3.5" />
                                 Edit Profile
                             </Button>
@@ -145,7 +147,7 @@ export function ProfileContent() {
                                 </div>
 
                                 <div className="pt-2 flex justify-end">
-                                    <Button className="h-9 px-3.5 text-sm font-medium bg-foreground text-background hover:bg-foreground/90">
+                                    <Button className="h-9 px-3.5 text-sm font-medium bg-accent text-accent-foreground hover:bg-accent/90 rounded-lg shadow-sm">
                                         <Save className="mr-1.5 h-3.5 w-3.5" />
                                         Save Changes
                                     </Button>
@@ -177,7 +179,7 @@ export function ProfileContent() {
 
                                 <div className="flex items-center justify-between p-4 bg-muted/50 rounded-lg border border-border mt-2">
                                     <div className="flex items-center gap-3">
-                                        <div className="h-9 w-9 rounded-lg bg-background flex items-center justify-center text-muted-foreground border border-border">
+                                        <div className="h-9 w-9 rounded-xl bg-accent/10 flex items-center justify-center text-accent">
                                             <Fingerprint className="h-4.5 w-4.5" />
                                         </div>
                                         <div>
